@@ -1,6 +1,18 @@
 import Image from 'next/image'
 
+// var asdf = "http://127.0.0.1:8000"
+
 export default function Home() {
+  const callAPI = async () => {
+    try {
+      const res = await fetch(`https://jsonplaceholder.typicode.com/posts/1`);
+      const data = await res.json();
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  console.log(callAPI)
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
