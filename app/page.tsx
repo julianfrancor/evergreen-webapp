@@ -14,24 +14,23 @@ export default function Home() {
     }
   };
 
-  const callApI2 = async () => {
-  var myHeaders = new Headers();
-  myHeaders.append("accept", "application/json");
-  myHeaders.append("Content-Type", "application/json");
+  // const callApI2 = async () => {
+  // var myHeaders = new Headers();
+  // myHeaders.append("accept", "application/json");
+  // myHeaders.append("Content-Type", "application/json");
   
-  var requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
-  };
+  // var requestOptions = {
+  //   method: 'GET',
+  //   headers: myHeaders,
+  //   redirect: 'follow'
+  // };
   
-  fetch("http://localhost:8000/movies/1", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
-  };
+  // fetch("http://localhost:8000/movies/1", requestOptions)
+  //   .then(response => response.text())
+  //   .then(result => console.log(result))
+  //   .catch(error => console.log('error', error));
+  // };
   console.log(callAPI)
-  console.log(callApI2)
   console.log("HOLA")
   
   return (
