@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 
 // var asdf = "http://127.0.0.1:8000"
