@@ -6,14 +6,32 @@ import Image from 'next/image'
 export default function Home() {
   const callAPI = async () => {
     try {
-      const res = await fetch(`https://jsonplaceholder.typicode.com/posts/1`);
+      const res = await fetch(`http://127.0.0.1:8000/movies/1`);
       const data = await res.json();
       console.log(data);
     } catch (err) {
       console.log(err);
     }
   };
+
+  const callApI2 = async () => {
+  var myHeaders = new Headers();
+  myHeaders.append("accept", "application/json");
+  myHeaders.append("Content-Type", "application/json");
+  
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  
+  fetch("http://localhost:8000/movies/1", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+  };
   console.log(callAPI)
+  console.log(callApI2)
   console.log("HOLA")
   
   return (
