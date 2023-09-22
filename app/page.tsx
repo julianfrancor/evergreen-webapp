@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 
 export default function Home() {
@@ -13,7 +14,7 @@ export default function Home() {
 
   const [response, setResponse] = useState(null);
 
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -21,7 +22,7 @@ export default function Home() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:any) => {
     e.preventDefault();
     callAPI('https://evergreen-adm.azurewebsites.net/users', 'POST', formData);
   };
@@ -34,7 +35,7 @@ export default function Home() {
     callAPI('https://evergreen-adm.azurewebsites.net/users/1', 'GET', null);
   };
 
-  const callAPI = async (url, method, body) => {
+  const callAPI = async (url:any, method:any, body:any) => {
     try {
       const res = await fetch(url, {
         method: method,
