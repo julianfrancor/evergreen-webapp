@@ -1,7 +1,7 @@
 'use client'
 import { NextResponse } from 'next/server'
 import { useState, useEffect } from 'react';
-import UserList from './UserList';
+import UserList from './userList';
 import { getData } from './getData';
 
 
