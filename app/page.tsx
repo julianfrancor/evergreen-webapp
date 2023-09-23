@@ -37,7 +37,7 @@ function convertData(dataForm: FormData[]): Record<string, string> {
   return result;
 }
 
-async function postCreateUser(convertedData) {
+async function postCreateUser(convertedData:any) {
   const res = await fetch('https://evergreen-adm.azurewebsites.net/users', {
     method: 'POST',
     headers: {
@@ -78,6 +78,7 @@ export default async function Page() {
     const convertedData = convertData([formData]);
     console.log(convertedData);
     postCreateUser(convertedData)
+    return formData
   }
 
   return (
@@ -85,7 +86,8 @@ export default async function Page() {
     <div className="flex items-center justify-center p-12">
       <div className="mx-auto w-full max-w-[550px]">
       
-      <form action={create}>
+      {/* <form action={create}> */}
+      <form>
         <div className="-mx-3 flex flex-wrap">
           {/* FIRST NAME */}
           <div className="w-full px-3 sm:w-1/2">
