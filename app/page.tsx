@@ -96,7 +96,14 @@ export default function Page() {
   <main>
     <div className="flex items-center justify-center p-12">
       <div className="mx-auto w-full max-w-[550px]">
-      
+
+      <div style={{ borderRadius: '20px' }}>
+        <img
+          src="https://github-production-user-asset-6210df.s3.amazonaws.com/53787841/270096343-3a9cb9cb-d458-4058-876e-601853b55062.png"
+          alt="Page Banner"
+          className="w-full mb-8 rounded-lg"
+        />
+      </div>
       {/* <form action={create}> */}
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="-mx-3 flex flex-wrap">
