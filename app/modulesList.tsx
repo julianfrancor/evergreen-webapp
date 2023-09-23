@@ -35,8 +35,8 @@ interface ModuleListProps {
         <div className="module-card" key={module.id}>
           <div className="module-info">
             <div className="module-info-row">
-              <div className="label">Module Name:</div>
-              <div className="value">{module.name}</div>
+              <div className="label">Module Id:</div>
+              <div className="value">{module.id}</div>
             </div>
             <div className="module-info-row">
               <div className="label">Name:</div>

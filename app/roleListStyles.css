@@ -1,0 +1,53 @@
+.role-card-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 20px;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  min-width: 100%; /* Allow it to take full width */
+  margin-left: -20px; /* Compensate for the margin-right on role cards */
+  padding-right: 20px; /* Add right padding to the container */
+  box-sizing: content-box; /* Ensure padding doesn't affect width */
+}
+
+
+.role-card {
+  min-width: 200px; /* Set a minimum width for each card */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin-right: 20px;
+  flex-shrink: 0;
+  scroll-snap-align: start; /* Ensure each card starts at the beginning of the viewport */
+}
+
+.role-avatar {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+.role-info {
+  flex-grow: 1;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-radius: 0 0 8px 8px;
+  overflow: auto;
+}
+
+.role-info-row {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.label {
+  font-weight: bold;
+  width: 100px;
+}
+
+.value {
+  flex-grow: 1;
+}

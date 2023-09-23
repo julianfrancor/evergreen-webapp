@@ -1,4 +1,4 @@
-export async function getRolesData() {
+export async function getRoleData() {
   const res = await fetch('https://evergreen-adm.azurewebsites.net/roles');
   
   if (!res.ok) {

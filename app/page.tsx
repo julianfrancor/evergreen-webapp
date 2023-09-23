@@ -2,9 +2,11 @@
 import { useState, useEffect } from 'react';
 import UserList from './userList';
 import ModuleList from './modulesList';
+import RoleList from './rolesList';
 import { getData } from './getData';
 import { postCreateUser } from './postData';
 import { getModuleData } from './getModuleData';
+import { getRoleData } from './getRoleData';
 
 interface FormData {
   name: string;
@@ -50,8 +52,10 @@ function convertData(dataForm: FormData[]): Record<string, string> {
 export default function Page() {
   const [users, setUsers] = useState([]);
   const [modules, setModules] = useState([]);
+  const [roles, setRoles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingModule, setLoadingModule] = useState(true);
+  const [loadingRole, setLoadingRole] = useState(true);
 
   useEffect(() => {
     getData()
@@ -70,8 +74,18 @@ export default function Page() {
         setLoadingModule(false)
       })
       .catch(error => {
-        console.error('Error fetching users:', error);
+        console.error('Error fetching modules:', error);
         setLoadingModule(false);
+      });
+
+      getRoleData()
+      .then(data => {
+        setRoles(data);
+        setLoadingRole(false)
+      })
+      .catch(error => {
+        console.error('Error fetching roles:', error);
+        setLoadingRole(false);
       });
   }, []);
 
@@ -277,7 +291,18 @@ export default function Page() {
           </div>
         </div>
 
-      
+        <div className="flex items-center justify-center p-12">
+          <div className="mx-auto w-full max-w-[550px]">
+
+            {loadingRole ? (
+              <div>loadingRole...</div>
+            ) : (
+              <RoleList roles={roles}/>
+            )}
+
+          </div>
+        </div>
+
       </div>
     </div>
   </main>)
