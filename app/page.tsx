@@ -1,8 +1,10 @@
 'use client'
 import { useState, useEffect } from 'react';
 import UserList from './userList';
+import ModuleList from './modulesList';
 import { getData } from './getData';
 import { postCreateUser } from './postData';
+import { getModuleData } from './getModuleData';
 
 interface FormData {
   name: string;
@@ -47,7 +49,9 @@ function convertData(dataForm: FormData[]): Record<string, string> {
 
 export default function Page() {
   const [users, setUsers] = useState([]);
+  const [modules, setModules] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingModule, setLoadingModule] = useState(true);
 
   useEffect(() => {
     getData()
@@ -58,6 +62,16 @@ export default function Page() {
       .catch(error => {
         console.error('Error fetching users:', error);
         setLoading(false);
+      });
+
+      getModuleData()
+      .then(data => {
+        setModules(data);
+        setLoadingModule(false)
+      })
+      .catch(error => {
+        console.error('Error fetching users:', error);
+        setLoadingModule(false);
       });
   }, []);
 
@@ -248,6 +262,22 @@ export default function Page() {
 
         </div>
       </div>
+
+        <div className="flex items-center justify-center p-12">
+          <div className="mx-auto w-full max-w-[550px]">
+            {/* ... Your form code ... */}
+
+            {/* Conditionally render UserList */}
+            {loadingModule ? (
+              <div>loadingModule...</div>
+            ) : (
+              <ModuleList modules={modules}/>
+            )}
+
+          </div>
+        </div>
+
+      
       </div>
     </div>
   </main>)
