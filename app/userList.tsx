@@ -19,12 +19,12 @@ interface UserListProps {
 
   function UserList({ users }: UserListProps) {
     
-    const carouselRef = useRef(null);
-  
-    const scroll = (direction:any) => {
+    const carouselRef = useRef<HTMLDivElement>(null); // Make sure to specify the type
+
+    const scroll = (direction: string) => {
       const carousel = carouselRef.current;
       if (carousel) {
-        carousel.scrollBy({
+        (carousel as HTMLDivElement).scrollBy({
           left: direction === 'left' ? -300 : 300,
           behavior: 'smooth'
         });

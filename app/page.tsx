@@ -76,12 +76,12 @@ export default function Page() {
     // Create user
     try {
       const convertedData = convertData([
-        { name: "username", value: formData.get('username')?.toString() },
-        { name: "name", value: formData.get('firstName')?.toString() },
-        { name: "last_name", value: formData.get('lastName')?.toString() },
-        { name: "userType", value: formData.get('userType')?.toString() },
-        { name: "password", value: formData.get('password')?.toString() },
-        { name: "status", value: formData.get('status')?.toString() },
+        { name: "username", value: formData.get('username')?.toString()! },
+        { name: "name", value: formData.get('firstName')?.toString()! },
+        { name: "last_name", value: formData.get('lastName')?.toString()! },
+        { name: "userType", value: formData.get('userType')?.toString()! },
+        { name: "password", value: formData.get('password')?.toString()! },
+        { name: "status", value: formData.get('status')?.toString()! },
       ]);
 
       const response = await postCreateUser(convertedData);
