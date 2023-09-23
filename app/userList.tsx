@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import './UserList.css';
+import './UserListStyles.css';
 
 interface User {
   last_name: string;

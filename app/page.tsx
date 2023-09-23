@@ -1,9 +1,8 @@
 'use client'
-import { NextResponse } from 'next/server'
 import { useState, useEffect } from 'react';
 import UserList from './userList';
 import { getData } from './getData';
-
+import { postCreateUser } from './postData';
 
 interface FormData {
   name: string;
@@ -14,22 +13,25 @@ function convertData(dataForm: FormData[]): Record<string, string> {
   const result: Record<string, string> = {};
 
   for (const item of dataForm) {
+    console.log("dataForm")
+    console.log(dataForm)
+    console.log("dataForm")
     switch (item.name) {
       case 'username':
         result['username'] = item.value;
         break;
-      case 'firstName':
+      case 'name':
         result['name'] = item.value;
         break;
-      case 'lastName':
-          result['last_name'] = item.value;
-          break;
+      case 'last_name':
+        result['last_name'] = item.value;
+        break;
       case 'userType':
         result['user_type'] = item.value;
         break;
       case 'password':
-          result['password'] = item.value;
-          break;
+        result['password'] = item.value;
+        break;
       case 'status':
         result['status'] = item.value;
         break;
@@ -37,25 +39,11 @@ function convertData(dataForm: FormData[]): Record<string, string> {
         break;
     }
   }
-
+   console.log("result")
+   console.log(result)
+   console.log("result")
   return result;
 }
-
-async function postCreateUser(convertedData:any) {
-  const res = await fetch('https://evergreen-adm.azurewebsites.net/users', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(convertedData),
-  })
- 
-  const data = await res.json()
-  console.log(data)
- 
-  return NextResponse.json(data)
-}
-
 
 export default function Page() {
   const [users, setUsers] = useState([]);
@@ -72,14 +60,37 @@ export default function Page() {
         setLoading(false);
       });
   }, []);
-    
-    async function create(formData: FormData) {
-      console.log(formData)
-      const convertedData = convertData([formData]);
-      console.log(convertedData);
-      postCreateUser(convertedData)
-      return formData
+
+  async function create(formData: FormData) {
+    const convertedData = convertData([formData]);
+    const response = await postCreateUser(convertedData);
+    console.log(response);
+  }
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault(); // Prevents the default form submission behavior
+
+    // Get form data
+    const formData = new FormData(e.currentTarget);
+
+    // Create user
+    try {
+      const convertedData = convertData([
+        { name: "username", value: formData.get('username')?.toString() },
+        { name: "name", value: formData.get('firstName')?.toString() },
+        { name: "last_name", value: formData.get('lastName')?.toString() },
+        { name: "userType", value: formData.get('userType')?.toString() },
+        { name: "password", value: formData.get('password')?.toString() },
+        { name: "status", value: formData.get('status')?.toString() },
+      ]);
+
+      const response = await postCreateUser(convertedData);
+
+      console.log('User created:', response);
+    } catch (error) {
+      console.error('Error creating user:', error);
     }
+  }
 
   return (
   <main>
@@ -87,7 +98,7 @@ export default function Page() {
       <div className="mx-auto w-full max-w-[550px]">
       
       {/* <form action={create}> */}
-      <form>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <div className="-mx-3 flex flex-wrap">
           {/* FIRST NAME */}
           <div className="w-full px-3 sm:w-1/2">
