@@ -37,12 +37,11 @@ function convertData(dataForm: FormData[]): Record<string, string> {
   return result;
 }
 
-export async function postCreateUser(convertedData) {
+async function postCreateUser(convertedData) {
   const res = await fetch('https://evergreen-adm.azurewebsites.net/users', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'API-Key': process.env.DATA_API_KEY,
     },
     body: JSON.stringify(convertedData),
   })
@@ -75,10 +74,8 @@ export default async function Page() {
   
   async function create(formData: FormData) {
     'use server'
-    // mutate data
-    // revalidate cache
     console.log(formData)
-    const convertedData = convertData(formData);
+    const convertedData = convertData([formData]);
     console.log(convertedData);
     postCreateUser(convertedData)
   }
