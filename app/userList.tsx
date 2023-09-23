@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, { useRef } from 'react';
 import './UserListStyles.css';
 
 interface User {
@@ -17,9 +17,24 @@ interface UserListProps {
   users: User[];
 }
 
-function UserList({ users }: UserListProps) {
+  function UserList({ users }: UserListProps) {
+    
+    const carouselRef = useRef(null);
+  
+    const scroll = (direction:any) => {
+      const carousel = carouselRef.current;
+      if (carousel) {
+        carousel.scrollBy({
+          left: direction === 'left' ? -300 : 300,
+          behavior: 'smooth'
+        });
+      }
+    }
+
   return (
-    <div className="user-card-grid">
+
+    <div className="user-carousel">
+      <div className="user-card-container" ref={carouselRef}>
       {users.map((user, index) => (
         <div className="user-card" key={user.id}>
           <img className="user-avatar" src={user.photo} alt={`Avatar for ${user.name}`} />
@@ -47,6 +62,9 @@ function UserList({ users }: UserListProps) {
           </div>
         </div>
       ))}
+      </div>
+      <button className="carousel-button left" onClick={() => scroll('left')}>&lt;</button>
+      <button className="carousel-button right" onClick={() => scroll('right')}>&gt;</button>
     </div>
   );
 }

@@ -1,25 +1,41 @@
 .user-card-container {
   display: flex;
-  flex-wrap: wrap;
   gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 20px;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  min-width: 100%; /* Allow it to take full width */
+  margin-left: -20px; /* Compensate for the margin-right on user cards */
+  padding-right: 20px; /* Add right padding to the container */
+  box-sizing: content-box; /* Ensure padding doesn't affect width */
 }
 
+
 .user-card {
+  min-width: 200px; /* Set a minimum width for each card */
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 20px;
-  max-width: 300px;
-  flex: 0 0 calc(33.33% - 20px); /* Adjust card width for three cards per row */
   box-sizing: border-box;
-  margin-bottom: 20px; /* Add some spacing between rows */
+  margin-right: 20px;
+  flex-shrink: 0;
+  scroll-snap-align: start; /* Ensure each card starts at the beginning of the viewport */
 }
 
 .user-avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  width: 100%;
+  height: 200px;
   object-fit: cover;
-  margin-bottom: 10px;
+  border-radius: 8px 8px 0 0;
+}
+
+.user-info {
+  flex-grow: 1;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-radius: 0 0 8px 8px;
+  overflow: auto;
 }
 
 .user-info-row {
@@ -34,11 +50,4 @@
 
 .value {
   flex-grow: 1;
-}
-
-.user-card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
 }
